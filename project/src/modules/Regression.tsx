@@ -6,6 +6,7 @@ import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ScatterC
 import { mean, sum, correlation, round } from '../utils/math';
 import { regressionSampleData } from '../utils/sampleData';
 import { saveState, loadState } from '../utils/storage';
+import { BlockMath, InlineMath } from 'react-katex';
 
 interface RegressionData {
   x: number;
@@ -188,41 +189,74 @@ const Regression: React.FC = () => {
           <div>
             <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Theoretical Definition</h4>
             <p className="text-gray-600 dark:text-gray-400">
-              <strong>Correlation</strong> measures the strength and direction of linear relationship between two variables,
-              while <strong>Regression</strong> helps us predict one variable from another using mathematical relationships.
+              Regression is a statistical method used to study the relationship between two variables, where one variable (dependent variable) is predicted based on the other variable (independent variable).
             </p>
           </div>
           
           <div>
             <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Key Formulas</h4>
-            <ul className="space-y-2 text-gray-600 dark:text-gray-400">
-              <li><strong>Correlation Coefficient:</strong> r = Sxy / √(Sxx × Syy)</li>
-              <li><strong>Regression of Y on X:</strong> Y - Ȳ = bYX(X - X̄), where bYX = Sxy/Sxx</li>
-              <li><strong>Regression of X on Y:</strong> X - X̄ = bXY(Y - Ȳ), where bXY = Sxy/Syy</li>
-            </ul>
+            <div className="space-y-6">
+              <div>
+                <h5 className="font-medium text-gray-700 dark:text-gray-300 mb-3">Regression of Y on X:</h5>
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-3">
+                  <BlockMath math={"Y - \\bar{Y} = b_{YX}(X - \\bar{X})"} />
+                  <BlockMath math={"Y = a + b_{YX}X"} />
+                  <BlockMath math={"b_{YX} = \\frac{S_{xy}}{S_{xx}} = \\frac{\\sum (X - \\bar{X})(Y - \\bar{Y})}{\\sum (X - \\bar{X})^2}"} />
+                  <BlockMath math={"a = \\bar{Y} - b_{YX}\\bar{X}"} />
+                </div>
+              </div>
+              
+              <div>
+                <h5 className="font-medium text-gray-700 dark:text-gray-300 mb-3">Regression of X on Y:</h5>
+                <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg space-y-3">
+                  <BlockMath math={"X - \\bar{X} = b_{XY}(Y - \\bar{Y})"} />
+                  <BlockMath math={"X = a' + b_{XY}Y"} />
+                  <BlockMath math={"b_{XY} = \\frac{S_{xy}}{S_{yy}} = \\frac{\\sum (X - \\bar{X})(Y - \\bar{Y})}{\\sum (Y - \\bar{Y})^2}"} />
+                  <BlockMath math={"a' = \\bar{X} - b_{XY}\\bar{Y}"} />
+                </div>
+              </div>
+            </div>
           </div>
           
           <div>
             <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Properties</h4>
-            <ul className="space-y-1 text-gray-600 dark:text-gray-400">
-              <li>• r² = bYX × bXY</li>
-              <li>• Both regression lines pass through (X̄, Ȳ)</li>
-              <li>• If r = ±1, both lines coincide</li>
-              <li>• If r = 0, lines are perpendicular</li>
+            <ul className="space-y-2 text-gray-600 dark:text-gray-400">
+              <li>• Both regression lines pass through the point <InlineMath math={"(\\bar{X}, \\bar{Y})"} /></li>
+              <li>• If r = ±1, both regression lines coincide</li>
+              <li>• If r = 0, the lines are perpendicular</li>
+              <li>• Relationship between slopes:</li>
             </ul>
+            <div className="mt-2">
+              <BlockMath math={"r^2 = b_{YX} \\times b_{XY}"} />
+            </div>
           </div>
           
           <div>
             <h4 className="font-semibold text-gray-800 dark:text-gray-200 mb-2">Worked Example</h4>
             <div className="bg-gray-50 dark:bg-gray-700 p-4 rounded-lg">
-              <p className="text-gray-600 dark:text-gray-400 mb-2">Given data: X = [2, 4, 6, 8, 10], Y = [4, 5, 7, 8, 11]</p>
-              <ol className="list-decimal list-inside space-y-1 text-sm text-gray-600 dark:text-gray-400">
-                <li>X̄ = 30/5 = 6, Ȳ = 35/5 = 7</li>
-                <li>Sxx = Σ(X-X̄)² = 40, Syy = Σ(Y-Ȳ)² = 30, Sxy = Σ(X-X̄)(Y-Ȳ) = 34</li>
-                <li>r = 34/√(40×30) = 34/34.64 = 0.982</li>
-                <li>bYX = 34/40 = 0.85, bXY = 34/30 = 1.133</li>
-                <li>Y - 7 = 0.85(X - 6) → Y = 0.85X + 1.9</li>
-              </ol>
+              <p className="text-gray-600 dark:text-gray-400 mb-3">Given data: X = [2, 4, 6, 8, 10], Y = [4, 5, 7, 8, 11]</p>
+              <div className="space-y-3">
+                <div>
+                  <span className="text-gray-600 dark:text-gray-400">1. </span>
+                  <BlockMath math={"\\bar{X} = \\frac{\\Sigma X}{n} = \\frac{30}{5} = 6, \\quad \\bar{Y} = \\frac{\\Sigma Y}{n} = \\frac{35}{5} = 7"} />
+                </div>
+                <div>
+                  <span className="text-gray-600 dark:text-gray-400">2. </span>
+                  <BlockMath math={"S_{xx} = \\Sigma(X - \\bar{X})^2 = 40, \\quad S_{yy} = \\Sigma(Y - \\bar{Y})^2 = 30, \\quad S_{xy} = \\Sigma(X - \\bar{X})(Y - \\bar{Y}) = 34"} />
+                </div>
+                <div>
+                  <span className="text-gray-600 dark:text-gray-400">3. </span>
+                  <BlockMath math={"b_{YX} = \\frac{34}{40} = 0.85, \\quad b_{XY} = \\frac{34}{30} = 1.133"} />
+                </div>
+                <div>
+                  <span className="text-gray-600 dark:text-gray-400">4. Regression equation of Y on X:</span>
+                  <BlockMath math={"Y - 7 = 0.85(X - 6) \\quad \\Rightarrow \\quad Y = 0.85X + 1.9"} />
+                </div>
+                <div>
+                  <span className="text-gray-600 dark:text-gray-400">5. Regression equation of X on Y:</span>
+                  <BlockMath math={"X - 6 = 1.133(Y - 7) \\quad \\Rightarrow \\quad X = 1.133Y - 2.9"} />
+                </div>
+              </div>
             </div>
           </div>
         </div>

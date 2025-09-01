@@ -23,9 +23,13 @@ function AppContent() {
   return (
     <div className="min-h-screen">
       <div className="flex min-h-screen bg-gray-50">
-        <Sidebar currentModule={currentModule} setCurrentModule={setCurrentModule} />
+        {/* Fixed Sidebar - Hidden on mobile, visible on md+ screens */}
+        <div className="fixed left-0 top-0 h-full z-30 hidden md:block">
+          <Sidebar currentModule={currentModule} setCurrentModule={setCurrentModule} />
+        </div>
         
-        <div className="flex-1 flex flex-col">
+        {/* Main Content with responsive left margin */}
+        <div className="flex-1 flex flex-col md:ml-64">
           <Topbar 
             darkMode={false}
             setDarkMode={() => {}} // No-op function since theme is fixed

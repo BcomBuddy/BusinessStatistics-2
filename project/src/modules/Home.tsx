@@ -50,26 +50,63 @@ const Home: React.FC = () => {
 
   return (
     <div className="max-w-7xl mx-auto">
-      <div className="text-center mb-12">
-        <div className="flex items-center justify-center mb-6">
-          <BookOpen className="w-12 h-12 text-blue-600 mr-4" />
-          <div>
-            <h1 className="text-4xl font-bold text-gray-900">
-              Business Statistics II
-            </h1>
-            <p className="text-xl text-gray-600">
-              Interactive Learning Simulator
-            </p>
+      {/* New Gradient Header Section */}
+      <div className="relative overflow-hidden rounded-2xl mb-12">
+        <div className="bg-gradient-to-r from-blue-600 via-blue-700 to-purple-700 p-12 text-center relative z-10">
+          {/* Background Pattern */}
+          <div className="absolute inset-0 opacity-10">
+            <div className="absolute top-0 left-0 w-32 h-32 bg-white rounded-full -translate-x-16 -translate-y-12"></div>
+            <div className="absolute top-0 right-0 w-24 h-24 bg-white rounded-full translate-x-12 -translate-y-12"></div>
+            <div className="absolute bottom-0 left-1/4 w-20 h-20 bg-white rounded-full -translate-x-10 translate-y-10"></div>
           </div>
+          
+          {/* Icon */}
+          <div className="flex justify-center mb-6">
+            <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center border border-white/30">
+              <BookOpen className="w-12 h-12 text-white" />
+            </div>
+          </div>
+          
+          {/* Main Heading */}
+          <h1 className="text-5xl font-bold text-white mb-4 tracking-tight">
+            Business Statistics II
+          </h1>
+          
+          {/* Subheading */}
+          <p className="text-2xl text-white/90 font-medium mb-6">
+            Interactive Learning Simulator
+          </p>
+          
+          {/* Description */}
+          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
+            Master statistical concepts through interactive simulations, step-by-step calculations, 
+            and hands-on practice. Each module includes theory, guided examples, and practical tools 
+            to enhance your understanding of business statistics.
+          </p>
         </div>
-        
-        <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-          Master statistical concepts through interactive simulations, step-by-step calculations, 
-          and hands-on practice. Each module includes theory, guided examples, and practical tools 
-          to enhance your understanding of business statistics.
-        </p>
       </div>
 
+      {/* YouTube Video Section */}
+      <div className="mb-12">
+        <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center flex items-center justify-center">
+          🎥 Learn about this simulator
+        </h2>
+        
+        <div className="max-w-4xl mx-auto">
+          <div className="relative w-full h-[400px] rounded-xl shadow-lg overflow-hidden">
+            <iframe
+              src="https://www.youtube.com/embed/aDWRS-3E1dM?rel=0&modestbranding=1"
+              title="Business Statistics II Simulator Introduction"
+              className="absolute inset-0 w-full h-full"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+
+      {/* Rest of the content remains unchanged */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {modules.map((module) => {
           const Icon = module.icon;

@@ -27,13 +27,13 @@ const Sidebar: React.FC<SidebarProps> = ({ currentModule, setCurrentModule }) =>
   ];
 
   return (
-    <div className="w-64 bg-white shadow-lg border-r border-gray-200">
+    <div className="w-64 h-full bg-white shadow-lg border-r border-gray-200 overflow-y-auto">
       <div className="p-6">
         <h1 className="text-xl font-bold text-gray-800">
           Business Statistics II
         </h1>
         <p className="text-sm text-gray-600 mt-1">
-          B.Com 2nd Year, Sem-4
+          2nd Year 4th Semester
         </p>
       </div>
       
