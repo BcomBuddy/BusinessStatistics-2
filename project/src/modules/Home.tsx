@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { 
   TrendingUp, 
@@ -6,10 +6,25 @@ import {
   Activity, 
   Dice6, 
   Calculator, 
-  BookOpen 
+  BookOpen,
+  ChevronDown
 } from 'lucide-react';
 
 const Home: React.FC = () => {
+  const [selectedLanguage, setSelectedLanguage] = useState('english');
+
+  const videoUrls = {
+    english: 'https://www.youtube.com/embed/aDWRS-3E1dM?rel=0&modestbranding=1',
+    hindi: 'https://www.youtube.com/embed/brcWAks6ytM?rel=0&modestbranding=1',
+    telugu: 'https://www.youtube.com/embed/etBcx9sW-a8?rel=0&modestbranding=1'
+  };
+
+  const languageOptions = [
+    { value: 'english', label: 'English' },
+    { value: 'hindi', label: 'Hindi/Urdu' },
+    { value: 'telugu', label: 'Telugu' }
+  ];
+
   const modules = [
     {
       id: 'regression',
@@ -92,10 +107,39 @@ const Home: React.FC = () => {
           🎥 Learn about this simulator
         </h2>
         
+        {/* Language Dropdown */}
+        <div className="max-w-4xl mx-auto mb-6">
+          <div className="flex justify-center">
+            <div className="relative">
+              <label htmlFor="language-select" className="block text-sm font-medium text-gray-700 mb-2">
+                Select Video Language
+              </label>
+              <div className="relative">
+                <select
+                  id="language-select"
+                  value={selectedLanguage}
+                  onChange={(e) => setSelectedLanguage(e.target.value)}
+                  className="appearance-none bg-white border border-gray-300 rounded-lg px-4 py-3 pr-10 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm min-w-[200px]"
+                >
+                  {languageOptions.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                  <ChevronDown className="w-5 h-5 text-gray-400" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        {/* Video Player */}
         <div className="max-w-4xl mx-auto">
           <div className="relative w-full h-[400px] rounded-xl shadow-lg overflow-hidden">
             <iframe
-              src="https://www.youtube.com/embed/aDWRS-3E1dM?rel=0&modestbranding=1"
+              src={videoUrls[selectedLanguage as keyof typeof videoUrls]}
               title="Business Statistics II Simulator Introduction"
               className="absolute inset-0 w-full h-full"
               frameBorder="0"
