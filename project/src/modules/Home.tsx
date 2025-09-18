@@ -14,9 +14,9 @@ const Home: React.FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState('english');
 
   const videoUrls = {
-    english: 'https://www.youtube.com/embed/aDWRS-3E1dM?rel=0&modestbranding=1',
-    hindi: 'https://www.youtube.com/embed/brcWAks6ytM?rel=0&modestbranding=1',
-    telugu: 'https://www.youtube.com/embed/etBcx9sW-a8?rel=0&modestbranding=1'
+    english: 'https://www.youtube.com/embed/KmLj8YFJhow?rel=0&modestbranding=1',
+    hindi: 'https://www.youtube.com/embed/xKqoxH36pI8?rel=0&modestbranding=1',
+    telugu: 'https://www.youtube.com/embed/U2EoLCHR8AQ?rel=0&modestbranding=1'
   };
 
   const languageOptions = [
