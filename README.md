@@ -45,7 +45,6 @@ cd BusinessStatistics-2
 
 2. Install dependencies:
 ```bash
-cd project
 npm install
 ```
 
@@ -104,7 +103,7 @@ The application uses Firebase Authentication. To set up your own Firebase projec
 ## 📁 Project Structure
 
 ```
-project/
+BusinessStatistics-2/
 ├── src/
 │   ├── components/
 │   │   ├── Login.tsx                 # Login page with Firebase auth
@@ -118,7 +117,8 @@ project/
 │   ├── modules/                     # Statistical learning modules
 │   └── utils/                       # Utility functions
 ├── public/
-└── package.json
+├── package.json
+└── README.md
 ```
 
 ## 🔧 Development
