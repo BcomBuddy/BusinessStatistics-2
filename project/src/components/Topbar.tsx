@@ -1,17 +1,34 @@
 import React from 'react';
-import { Sun, Moon } from 'lucide-react';
+import { LogOut, User } from 'lucide-react';
+import { AuthService } from '../services/authService';
 
 interface TopbarProps {
-  darkMode: boolean;
-  setDarkMode: (darkMode: boolean) => void;
   hideControls?: boolean;
+  onLogout?: () => void;
 }
 
 const Topbar: React.FC<TopbarProps> = ({ 
-  darkMode, 
-  setDarkMode, 
-  hideControls = false
+  hideControls = false,
+  onLogout
 }) => {
+  const userEmail = localStorage.getItem('userEmail') || 'User';
+  const userDisplayName = localStorage.getItem('userDisplayName') || '';
+
+  const handleLogout = async () => {
+    try {
+      await AuthService.signOut();
+      onLogout?.();
+    } catch (error) {
+      console.error('Error signing out:', error);
+      // Fallback to manual logout
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('userEmail');
+      localStorage.removeItem('userDisplayName');
+      localStorage.removeItem('userUid');
+      onLogout?.();
+    }
+  };
+
   return (
     <div className="h-16 bg-white shadow border-b border-gray-200 flex items-center justify-between px-6">
       <div className="flex items-center space-x-4">
@@ -22,11 +39,16 @@ const Topbar: React.FC<TopbarProps> = ({
       
       {!hideControls && (
         <div className="flex items-center space-x-4">
+          <div className="flex items-center space-x-2 text-sm text-gray-600">
+            <User className="w-4 h-4" />
+            <span>{userDisplayName || userEmail}</span>
+          </div>
           <button
-            onClick={() => setDarkMode(!darkMode)}
+            onClick={handleLogout}
             className="p-2 text-gray-600 hover:bg-gray-100 rounded-lg transition-colors"
+            title="Logout"
           >
-            {darkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
+            <LogOut className="w-5 h-5" />
           </button>
         </div>
       )}
